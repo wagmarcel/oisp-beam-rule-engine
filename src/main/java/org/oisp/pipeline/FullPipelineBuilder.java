@@ -45,6 +45,7 @@ import org.oisp.transformation.PersistStatisticsRuleState;
 import org.oisp.transformation.PersistTimeBasedRuleState;
 import org.oisp.transformation.SendAlertFromRule;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,9 +138,16 @@ public final class FullPipelineBuilder {
         public void processElement(ProcessContext c) {
             KafkaRecord<String, byte[]> record = c.element();
             Gson g = new Gson();
-            List<Observation> obserations = g.fromJson(new String(record.getKV().getValue()), new TypeToken<List<Observation>>() {
+            List<Observation> observations = new ArrayList<Observation>();
+            Observation observation = g.fromJson(new String(record.getKV().getValue()), new TypeToken<Observation>() {
             }.getType());
-            c.output(obserations);
+            if (observation == null) {
+                g.fromJson(new String(record.getKV().getValue()), new TypeToken<List<Observation>>() {
+                }.getType());
+            } else {
+                observations.add(observation);
+            }
+            c.output(observations);
         }
     }
 
