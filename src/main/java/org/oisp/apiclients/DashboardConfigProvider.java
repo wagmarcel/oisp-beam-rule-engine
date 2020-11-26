@@ -22,7 +22,8 @@ import java.io.Serializable;
 
 public class DashboardConfigProvider implements DashboardConfig, Serializable {
 
-    private final String token;
+    private String token;
+    private String refreshToken;
     private final String url;
     private final boolean strictSSL;
 
@@ -62,6 +63,21 @@ public class DashboardConfigProvider implements DashboardConfig, Serializable {
     @Override
     public String getToken() {
         return token;
+    }
+
+    @Override
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @Override
+    public String getRefreshToken() {
+        return token;
+    }
+
+    @Override
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     @Override

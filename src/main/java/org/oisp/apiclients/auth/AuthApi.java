@@ -15,22 +15,15 @@
  *
  */
 
-package org.oisp.apiclients;
+package org.oisp.apiclients.auth;
+
+import org.oisp.apiclients.InvalidDashboardResponseException;
+
+import java.util.List;
 
 
-public interface DashboardConfig {
+public interface AuthApi {
 
-    String DASHBOARD_TOKEN_PROPERTY = "DASHBOARD_TOKEN";
-    String DASHBOARD_URL_PROPERTY = "DASHBOARD_URL";
-    String DASHBOARD_STRICT_SSL_VERIFICATION = "DASHBOARD_STRICT_SSL";
-
-    String getUrl();
-
-    String getToken();
-    void setToken(String token);
-    String getRefreshToken();
-    void setRefreshToken(String refreshToken);
-
-    boolean isStrictSSL();
-
+    RefreshToken getRefreshToken() throws InvalidDashboardResponseException;
+    AccessToken updateAccessToken() throws InvalidDashboardResponseException;
 }
