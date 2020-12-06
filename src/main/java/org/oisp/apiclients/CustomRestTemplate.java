@@ -42,11 +42,8 @@ public final class CustomRestTemplate {
     private final RestTemplate template;
 
     private CustomRestTemplate(DashboardConfig dashboardConfig) {
-        if (!dashboardConfig.isStrictSSL()) {
-            template = new RestTemplate(createHttpRequestFactory());
-        } else {
-            template = new RestTemplate();
-        }
+
+        template = new RestTemplate(createHttpRequestFactory());
     }
 
     public static CustomRestTemplate build(DashboardConfig dashboardConfig) {

@@ -22,11 +22,9 @@ import com.google.gson.Gson;
 
 @SuppressWarnings({"checkstyle:methodname", "checkstyle:parametername", "checkstyle:membername", "PMD.TooManyFields" })
 public class ExternalConfig {
-    private String zookeeper_hbase_quorum;
-    private String hbase_table_prefix;
-    private String token;
+    private String dashboard_user;
+    private String dashboard_password;
     private String dashboard_url;
-    private Boolean dashboard_strict_ssl;
     private String kafka_servers;
     private String kafka_zookeeper_quorum;
     private String kafka_observations_topic;
@@ -34,22 +32,22 @@ public class ExternalConfig {
     private String kafka_heartbeat_topic;
     private int kafka_heartbeat_interval;
     private String application_name;
-    private String hadoop_security_authentication;
-    private String krb_kdc;
-    private String krb_password;
-    private String krb_user;
-    private String krb_realm;
-    private String krb_master_principal;
-    private String krb_regionserver_principal;
-    private String backendType;
 
 
-    public String getBackendType() {
-        return backendType;
+    public String getDashboard_user() {
+        return dashboard_user;
     }
 
-    public void setBackendType(String backendType) {
-        this.backendType = backendType;
+    public void setDashboard_user(String dashboard_user) {
+        this.dashboard_user = dashboard_user;
+    }
+
+    public String getDashboard_password() {
+        return dashboard_password;
+    }
+
+    public void setDashboard_password(String dashboard_password) {
+        this.dashboard_password = dashboard_password;
     }
 
     public String getKafka_observations_topic() {
@@ -92,30 +90,6 @@ public class ExternalConfig {
         this.application_name = application_name;
     }
 
-    public String getZookeeper_hbase_quorum() {
-        return zookeeper_hbase_quorum;
-    }
-
-    public void setZookeeper_hbase_quorum(String zookeeper_hbase_quorum) {
-        this.zookeeper_hbase_quorum = zookeeper_hbase_quorum;
-    }
-
-    public String getHbase_table_prefix() {
-        return hbase_table_prefix;
-    }
-
-    public void setHbase_table_prefix(String hbase_table_prefix) {
-        this.hbase_table_prefix = hbase_table_prefix;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public String getDashboard_url() {
         return dashboard_url;
     }
@@ -140,69 +114,7 @@ public class ExternalConfig {
         this.kafka_zookeeper_quorum = kafka_zookeeper_quorum;
     }
 
-    public String getKrb_kdc() {
-        return krb_kdc;
-    }
 
-    public void setKrb_kdc(String krb_kdc) {
-        this.krb_kdc = krb_kdc;
-    }
-
-    public String getKrb_password() {
-        return krb_password;
-    }
-
-    public void setKrb_password(String krb_password) {
-        this.krb_password = krb_password;
-    }
-
-    public String getKrb_user() {
-        return krb_user;
-    }
-
-    public void setKrb_user(String krb_user) {
-        this.krb_user = krb_user;
-    }
-
-    public String getKrb_realm() {
-        return krb_realm;
-    }
-
-    public void setKrb_realm(String krb_realm) {
-        this.krb_realm = krb_realm;
-    }
-
-    public String getKrb_master_principal() {
-        return krb_master_principal;
-    }
-
-    public void setKrb_master_principal(String krb_master_principal) {
-        this.krb_master_principal = krb_master_principal;
-    }
-
-    public String getKrb_regionserver_principal() {
-        return krb_regionserver_principal;
-    }
-
-    public void setKrb_regionserver_principal(String krb_regionserver_principal) {
-        this.krb_regionserver_principal = krb_regionserver_principal;
-    }
-
-    public String getHadoop_security_authentication() {
-        return hadoop_security_authentication;
-    }
-
-    public void setHadoop_security_authentication(String hadoop_security_authentication) {
-        this.hadoop_security_authentication = hadoop_security_authentication;
-    }
-
-    public Boolean getDashboard_strict_ssl() {
-        return dashboard_strict_ssl;
-    }
-
-    public void setDashboard_strict_ssl(Boolean dashboard_strict_ssl) {
-        this.dashboard_strict_ssl = dashboard_strict_ssl;
-    }
 
     @Override
     public String toString() {
@@ -213,18 +125,9 @@ public class ExternalConfig {
                 .append("kafka_heartbeat_topic: ").append(getKafka_heartbeat_topic()).append(sep)
                 .append("kafka_heartbeat_interval: ").append(getKafka_heartbeat_interval()).append(sep)
                 .append("application_name: ").append(getApplication_name()).append(sep)
-                .append("zookeeper_hbase_quorum: ").append(getZookeeper_hbase_quorum()).append(sep)
-                .append("hbase_table_prefix: ").append(getHbase_table_prefix()).append(sep)
-                .append("token: ").append(getToken()).append(sep)
                 .append("dashboard_url: ").append(getDashboard_url()).append(sep)
-                .append("dashboard_strict_ssl: ").append(getDashboard_strict_ssl()).append(sep)
                 .append("kafka_servers: ").append(getKafka_servers()).append(sep)
-                .append("kafka_zookeeper_quorum: ").append(getKafka_zookeeper_quorum())
-                .append("krb user: ").append(krb_user)
-                .append("krb realm: ").append(krb_realm)
-                .append("krb kdc: ").append(krb_kdc)
-                .append("krb master principal: ").append(krb_master_principal)
-                .append("krb region server principal: ").append(krb_regionserver_principal);
+                .append("kafka_zookeeper_quorum: ").append(getKafka_zookeeper_quorum());
 
         return builder.toString();
     }
@@ -238,25 +141,13 @@ public class ExternalConfig {
 
 
         Config config = new Config()
-                .put(Config.getHbase().ZOOKEEPER_QUORUM, getZookeeper_hbase_quorum())
-                .put(Config.getHbase().TABLE_PREFIX, getHbase_table_prefix())
-                .put(Config.DASHBOARD_TOKEN_PROPERTY, getToken())
                 .put(Config.DASHBOARD_URL_PROPERTY, getDashboard_url())
-                .put(Config.DASHBOARD_STRICT_SSL_VERIFICATION, getDashboard_strict_ssl())
                 .put(Config.KAFKA_TOPIC_OBSERVATION_PROPERTY, getKafka_observations_topic())
                 .put(Config.KAFKA_TOPIC_RULES_UPDATE_PROPERTY, getKafka_rule_engine_topic())
                 .put(Config.KAFKA_TOPIC_HEARTBEAT_PROPERTY, getKafka_heartbeat_topic())
                 .put(Config.KAFKA_HEARTBEAT_INTERVAL_PROPERTY, getKafka_heartbeat_interval())
                 .put(Config.KAFKA_URI_PROPERTY, getKafka_servers())
-                .put(Config.KAFKA_ZOOKEEPER_PROPERTY, getKafka_zookeeper_quorum())
-                .put(Config.getHbase().AUTHENTICATION_METHOD, getHadoop_security_authentication())
-                .put(Config.getKbr().KRB_KDC, getKrb_kdc())
-                .put(Config.getKbr().KRB_PASS, getKrb_password())
-                .put(Config.getKbr().KRB_REALM, getKrb_realm())
-                .put(Config.getKbr().KRB_USER, getKrb_user())
-                .put(Config.getKbr().KRB_MASTER_PRINCIPAL, getKrb_master_principal())
-                .put(Config.getKbr().KRB_REGIONSERVER_PRINCIPAL, getKrb_regionserver_principal());
-
+                .put(Config.KAFKA_ZOOKEEPER_PROPERTY, getKafka_zookeeper_quorum());
         return config;
     }
 }

@@ -12,6 +12,7 @@ import org.oisp.conf.Config;
 import org.oisp.utils.LogHelper;
 import org.slf4j.Logger;
 
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class SendAlertFromRule extends DoFn<Rule, Byte> {
     private static final Logger LOG = LogHelper.getLogger(PersistRulesTask.class);
     private final AlertsApi alertsApi;
 
-    public SendAlertFromRule(Config userConfig) {
+    public SendAlertFromRule(Config userConfig) throws InvalidDashboardResponseException, InvalidParameterException {
         this(new DashboardAlertsApi(new DashboardConfigProvider(userConfig)));
     }
 

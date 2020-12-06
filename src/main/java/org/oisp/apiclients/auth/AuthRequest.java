@@ -15,21 +15,26 @@
  *
  */
 
-package org.oisp.data;
+package org.oisp.apiclients.auth;
 
-import org.oisp.collection.Rule;
+class AuthRequest {
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+    private String username;
+    private String password;
 
+    public String getUsername() {
+        return username;
+    }
 
-public interface RulesRepository {
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    Map<String, List<Rule>> getComponentsRules(String accountId, Set<String> componentsIds) throws IOException;
+    public String getPassword() {
+        return password;
+    }
 
-    void createTable() throws IOException;
-
-    void putRulesAndRemoveNotExistingOnes(Map<String, List<Rule>> componentsRules) throws IOException;
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

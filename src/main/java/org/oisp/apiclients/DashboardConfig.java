@@ -20,14 +20,11 @@ package org.oisp.apiclients;
 
 public interface DashboardConfig {
 
-    String DASHBOARD_TOKEN_PROPERTY = "DASHBOARD_TOKEN";
+    /*String DASHBOARD_TOKEN_PROPERTY = "DASHBOARD_TOKEN";
     String DASHBOARD_URL_PROPERTY = "DASHBOARD_URL";
-    String DASHBOARD_STRICT_SSL_VERIFICATION = "DASHBOARD_STRICT_SSL";
+    String DASHBOARD_STRICT_SSL_VERIFICATION = "DASHBOARD_STRICT_SSL";*/
 
     String getUrl();
 
     String getToken();
-
-    boolean isStrictSSL();
-
 }

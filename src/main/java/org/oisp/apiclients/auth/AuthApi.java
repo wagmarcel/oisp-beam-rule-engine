@@ -15,16 +15,12 @@
  *
  */
 
-package org.oisp.conf;
+package org.oisp.apiclients.auth;
 
-public final class HbaseProperties {
+import org.oisp.apiclients.InvalidDashboardResponseException;
 
-    public static final String ZOOKEEPER_QUORUM = "hbase.zookeeper.quorum";
-    public static final String TABLE_PREFIX = "hbase.table.prefix";
-    public static final String KERBEROS_AUTHENTICATION = "kerberos";
-    public static final String AUTHENTICATION_METHOD = "hadoop.security.authentication";
-    public static final String HBASE_AUTHENTICATION_METHOD = "hbase.security.authentication";
 
-    private HbaseProperties() {
-    }
+public interface AuthApi {
+
+    void getToken(String username, String password) throws InvalidDashboardResponseException;
 }

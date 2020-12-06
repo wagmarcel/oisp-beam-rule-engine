@@ -576,35 +576,8 @@
       <version>${beam.version}</version>
       <scope>runtime</scope>
     </dependency>
-    <!--<dependency>
-      <groupId>org.trustedanalytics</groupId>
-      <artifactId>hadoop-utils</artifactId>
-      <version>0.5.3</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-log4j12</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.hadoop</groupId>
-          <artifactId>hadoop-common</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.curator</groupId>
-          <artifactId>curator-client</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.codehaus.jackson</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>-->
 
-    <dependency>
-      <groupId>org.apache.hbase</groupId>
-      <artifactId>hbase-client</artifactId>
-      <version>1.4.4</version>
-    </dependency>
+
 
   </dependencies>
 

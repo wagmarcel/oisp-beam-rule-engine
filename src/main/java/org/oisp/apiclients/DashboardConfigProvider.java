@@ -17,32 +17,43 @@
 
 package org.oisp.apiclients;
 
+import org.oisp.apiclients.auth.DashboardAuthApi;
 import org.oisp.conf.Config;
 import java.io.Serializable;
+import java.security.InvalidParameterException;
 
 public class DashboardConfigProvider implements DashboardConfig, Serializable {
 
-    private final String token;
+    private String token;
+    private final String username;
+    private final String password;
     private final String url;
-    private final boolean strictSSL;
 
-    public DashboardConfigProvider(Config userConfig) {
-        Object token = userConfig.get(Config.DASHBOARD_TOKEN_PROPERTY);
+    public DashboardConfigProvider(Config userConfig) throws InvalidParameterException, InvalidDashboardResponseException {
+        Object username = userConfig.get(Config.DASHBOARD_USER_PROPERTY);
+        Object password = userConfig.get(Config.DASHBOARD_PASSWORD_PROPERTY);
         Object url = userConfig.get(Config.DASHBOARD_URL_PROPERTY);
 
-        if (token != null) {
-            this.token = token.toString();
+        if (username != null) {
+            this.username = username.toString();
         } else {
-            this.token = null;
+            throw new InvalidParameterException("Dashboard username not found!");
+        }
+
+        if (password != null) {
+            this.password = password.toString();
+        } else {
+            throw new InvalidParameterException("Dashboard password not found!");
         }
 
         if (url != null) {
             this.url = url.toString();
         } else {
-            this.url = null;
+            throw new InvalidParameterException("Dashboard URL not found!");
         }
 
-        this.strictSSL = parseStrictSSLOption(userConfig);
+        DashboardAuthApi dashboardAuthApi = new DashboardAuthApi(this);
+        dashboardAuthApi.getToken(this.username, this.password);
     }
 
     private Boolean parseStrictSSLOption(Config userConfig) {
@@ -63,10 +74,4 @@ public class DashboardConfigProvider implements DashboardConfig, Serializable {
     public String getToken() {
         return token;
     }
-
-    @Override
-    public boolean isStrictSSL() {
-        return strictSSL;
-    }
-
 }
