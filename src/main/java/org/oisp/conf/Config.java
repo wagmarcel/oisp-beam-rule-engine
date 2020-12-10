@@ -17,6 +17,7 @@ public class Config implements Serializable {
     public static final String DASHBOARD_USER_PROPERTY = "DASHBOARD_USER";
     public static final String DASHBOARD_PASSWORD_PROPERTY = "DASHBOARD_PASSWORD";
     public static final String DASHBOARD_URL_PROPERTY = "DASHBOARD_URL";
+    public static final String DASHBOARD_TOKEN_PROPERTY = "DASHBOARD_TOKEN";
     public static final String DASHBOARD_STRICT_SSL_VERIFICATION = "DASHBOARD_STRICT_SSL";
 
 

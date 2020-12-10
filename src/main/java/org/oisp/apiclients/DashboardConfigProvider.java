@@ -25,25 +25,34 @@ import java.security.InvalidParameterException;
 public class DashboardConfigProvider implements DashboardConfig, Serializable {
 
     private String token;
-    private final String username;
-    private final String password;
     private final String url;
 
     public DashboardConfigProvider(Config userConfig) throws InvalidParameterException, InvalidDashboardResponseException {
         Object username = userConfig.get(Config.DASHBOARD_USER_PROPERTY);
         Object password = userConfig.get(Config.DASHBOARD_PASSWORD_PROPERTY);
         Object url = userConfig.get(Config.DASHBOARD_URL_PROPERTY);
+        Object token = userConfig.get(Config.DASHBOARD_TOKEN_PROPERTY);
 
-        if (username != null) {
-            this.username = username.toString();
-        } else {
-            throw new InvalidParameterException("Dashboard username not found!");
-        }
 
-        if (password != null) {
-            this.password = password.toString();
+        if (token != null) {
+            this.token = token.toString();
         } else {
-            throw new InvalidParameterException("Dashboard password not found!");
+            String usernameStr;
+            String passwordStr;
+
+            if (username != null) {
+                usernameStr = username.toString();
+            } else {
+                throw new InvalidParameterException("No token and Dashboard username not found!");
+            }
+
+            if (password != null) {
+                passwordStr = password.toString();
+            } else {
+                throw new InvalidParameterException("No token and Dashboard password not found!");
+            }
+            DashboardAuthApi dashboardAuthApi = new DashboardAuthApi(this);
+            token = dashboardAuthApi.getToken(usernameStr, passwordStr);
         }
 
         if (url != null) {
@@ -51,19 +60,16 @@ public class DashboardConfigProvider implements DashboardConfig, Serializable {
         } else {
             throw new InvalidParameterException("Dashboard URL not found!");
         }
-
-        DashboardAuthApi dashboardAuthApi = new DashboardAuthApi(this);
-        dashboardAuthApi.getToken(this.username, this.password);
     }
 
-    private Boolean parseStrictSSLOption(Config userConfig) {
+    /*private Boolean parseStrictSSLOption(Config userConfig) {
         String strictSSL = userConfig.get(Config.DASHBOARD_STRICT_SSL_VERIFICATION).toString();
         //By default strictSSL option should be enabled
         if (strictSSL == null) {
             return true;
         }
         return Boolean.valueOf(strictSSL);
-    }
+    }*/
 
     @Override
     public String getUrl() {

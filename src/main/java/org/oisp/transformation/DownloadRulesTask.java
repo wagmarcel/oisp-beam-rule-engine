@@ -29,6 +29,7 @@ import org.oisp.utils.LogHelper;
 import org.oisp.conf.Config;
 import org.apache.beam.sdk.transforms.DoFn;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -39,7 +40,7 @@ public class DownloadRulesTask  extends DoFn<KV<String, String>, KV<String, Map<
     private final RulesApi rulesApi;
     private Map<String, List<Rule>> componentsRules;
     private static final Logger LOG = LogHelper.getLogger(DownloadRulesTask.class);
-    public DownloadRulesTask(Config userConfig) {
+    public DownloadRulesTask(Config userConfig) throws InvalidParameterException, InvalidDashboardResponseException {
         this(new DashboardRulesApi(new DashboardConfigProvider(userConfig)));
     }
 

@@ -22,5 +22,5 @@ import org.oisp.apiclients.InvalidDashboardResponseException;
 
 public interface AuthApi {
 
-    void getToken(String username, String password) throws InvalidDashboardResponseException;
+    String getToken(String username, String password) throws InvalidDashboardResponseException;
 }

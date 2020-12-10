@@ -51,19 +51,21 @@ public class DashboardAuthApi implements AuthApi, Serializable {
     }
 
     @Override
-    public void getToken(String username, String password) throws InvalidDashboardResponseException {
+    public String getToken(String username, String password) throws InvalidDashboardResponseException {
 
         HttpHeaders headers = ApiClientHelper.getHttpHeaders(config.getToken());
         HttpEntity req = new HttpEntity<>(createGetTokenBody(username, password), headers);
+        ResponseEntity<AuthResponse> resp;
 
         try {
-            ResponseEntity<String> resp = template.exchange(config.getUrl(), HttpMethod.POST, req, String.class);
+            resp = template.exchange(config.getUrl(), HttpMethod.POST, req, AuthResponse.class);
             if (resp.getStatusCode() != HttpStatus.OK) {
                 throw new InvalidDashboardResponseException("Invalid response - " + resp.getStatusCode());
             }
         } catch (RestClientException e) {
             throw new InvalidDashboardResponseException("Unknown dashboard response error.", e);
         }
+        return resp.getBody().getToken();
     }
 
     private AuthRequest createGetTokenBody(String username, String password) {

@@ -36,6 +36,7 @@ import org.oisp.utils.LogHelper;
 
 import org.slf4j.Logger;
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -57,7 +58,7 @@ public class GetComponentRulesTask extends DoFn<List<Observation>, List<RulesWit
         componentRuleversion = 0L;
     }
 
-    public GetComponentRulesTask(Config userConfig, PCollectionView<List<Long>> sideInput) {
+    public GetComponentRulesTask(Config userConfig, PCollectionView<List<Long>> sideInput) throws InvalidParameterException, InvalidDashboardResponseException {
         //this(new RulesHbaseRepository(userConfig));
         rulesApi = new DashboardRulesApi(new DashboardConfigProvider(userConfig));
         this.sideInput = sideInput;

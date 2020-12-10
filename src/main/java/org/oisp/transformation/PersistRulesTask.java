@@ -32,6 +32,7 @@ import org.oisp.conf.Config;
 import org.oisp.utils.LogHelper;
 import org.slf4j.Logger;
 
+import java.security.InvalidParameterException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,7 @@ public class PersistRulesTask extends DoFn<KV<String, Map<String, List<Rule>>>, 
     private final RulesApi rulesApi;
     private static final Logger LOG = LogHelper.getLogger(PersistRulesTask.class);
 
-    public PersistRulesTask(Config userConfig) {
+    public PersistRulesTask(Config userConfig) throws InvalidParameterException, InvalidDashboardResponseException {
         this(new DashboardRulesApi(new DashboardConfigProvider(userConfig)));
     }
 
