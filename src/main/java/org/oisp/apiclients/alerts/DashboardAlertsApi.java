@@ -43,7 +43,7 @@ public class DashboardAlertsApi implements AlertsApi, Serializable {
 
     private final String url;
     private final String token;
-    private DashboardConfigProvider config;
+    //private DashboardConfigProvider config;
     private static final String PATH = "/v1/api/alerts";
     private List<RulesWithObservation> rulesWithObservations;
 
@@ -57,7 +57,7 @@ public class DashboardAlertsApi implements AlertsApi, Serializable {
         token = dashboardConfig.getToken();
         url = dashboardConfig.getUrl() + PATH;
         template = restTemplate;
-        config = dashboardConfig;
+        //config = dashboardConfig;
     }
 
     private String getToken() {

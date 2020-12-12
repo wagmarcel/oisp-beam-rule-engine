@@ -44,7 +44,7 @@ public class DashboardRulesApi implements RulesApi, Serializable {
 
     private final String url;
     private final String token;
-    private final DashboardConfig config;
+    //private final DashboardConfig config;
     private static final String PATH = "/v1/api/";
     private static final String GET_COMPONENTS_RULES_PATH = "components/rules";
     private static final String UPDATE_RULES_PATH = "rules/synchronization_status/Sync";
@@ -62,7 +62,7 @@ public class DashboardRulesApi implements RulesApi, Serializable {
         token = dashboardConfig.getToken();
         url = dashboardConfig.getUrl() + PATH;
         template = restTemplate;
-        config = dashboardConfig;
+        //config = dashboardConfig;
     }
 
     @Override
