@@ -55,7 +55,7 @@ public class DashboardRulesApi implements RulesApi, Serializable {
     private transient RestTemplate template;
 
     public DashboardRulesApi(DashboardConfig dashboardConfig) {
-        this(dashboardConfig, CustomRestTemplate.build(dashboardConfig).getRestTemplate());
+        this(dashboardConfig, CustomRestTemplate.build().getRestTemplate());
     }
 
     public DashboardRulesApi(DashboardConfig dashboardConfig, RestTemplate restTemplate) {
@@ -125,6 +125,6 @@ public class DashboardRulesApi implements RulesApi, Serializable {
     private void readObject(ObjectInputStream o)
             throws IOException, ClassNotFoundException {
         o.defaultReadObject();
-        template = CustomRestTemplate.build(this.config).getRestTemplate();
+        template = CustomRestTemplate.build().getRestTemplate();
     }
 }

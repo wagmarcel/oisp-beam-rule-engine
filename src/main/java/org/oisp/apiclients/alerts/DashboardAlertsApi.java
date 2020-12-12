@@ -50,7 +50,7 @@ public class DashboardAlertsApi implements AlertsApi, Serializable {
     private transient RestTemplate template;
 
     public DashboardAlertsApi(DashboardConfigProvider dashboardConfig) {
-        this(dashboardConfig, CustomRestTemplate.build(dashboardConfig).getRestTemplate());
+        this(dashboardConfig, CustomRestTemplate.build().getRestTemplate());
     }
 
     public DashboardAlertsApi(DashboardConfigProvider dashboardConfig, RestTemplate restTemplate) {
@@ -117,6 +117,6 @@ public class DashboardAlertsApi implements AlertsApi, Serializable {
     private void readObject(ObjectInputStream o)
             throws IOException, ClassNotFoundException {
         o.defaultReadObject();
-        template = CustomRestTemplate.build(config).getRestTemplate();
+        template = CustomRestTemplate.build().getRestTemplate();
     }
 }

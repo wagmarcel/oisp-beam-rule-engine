@@ -43,7 +43,7 @@ public class DashboardAuthApi implements AuthApi, Serializable {
     private transient RestTemplate template;
 
     public DashboardAuthApi(DashboardConfigProvider dashboardConfig) {
-        this(dashboardConfig, CustomRestTemplate.build(dashboardConfig).getRestTemplate());
+        this(dashboardConfig, CustomRestTemplate.build().getRestTemplate());
     }
 
     public DashboardAuthApi(DashboardConfigProvider dashboardConfig, RestTemplate restTemplate) {
@@ -81,6 +81,6 @@ public class DashboardAuthApi implements AuthApi, Serializable {
     private void readObject(ObjectInputStream o)
             throws IOException, ClassNotFoundException {
         o.defaultReadObject();
-        template = CustomRestTemplate.build(config).getRestTemplate();
+        template = CustomRestTemplate.build().getRestTemplate();
     }
 }
