@@ -1,7 +1,7 @@
 package org.oisp.apiclients.auth;
 
 public class AuthResponse {
-    String token;
+    private String token;
 
     public String getToken() {
         return token;

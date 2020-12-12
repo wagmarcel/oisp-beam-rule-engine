@@ -21,17 +21,18 @@ import org.oisp.apiclients.ApiClientHelper;
 import org.oisp.apiclients.CustomRestTemplate;
 import org.oisp.apiclients.DashboardConfigProvider;
 import org.oisp.apiclients.InvalidDashboardResponseException;
-import org.oisp.apiclients.alerts.AlertsApi;
-import org.oisp.collection.Observation;
-import org.oisp.collection.Rule;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 
 public class DashboardAuthApi implements AuthApi, Serializable {
@@ -58,7 +59,7 @@ public class DashboardAuthApi implements AuthApi, Serializable {
         ResponseEntity<AuthResponse> resp;
 
         try {
-            resp = template.exchange(config.getUrl(), HttpMethod.POST, req, AuthResponse.class);
+            resp = template.exchange(config.getUrl() + PATH, HttpMethod.POST, req, AuthResponse.class);
             if (resp.getStatusCode() != HttpStatus.OK) {
                 throw new InvalidDashboardResponseException("Invalid response - " + resp.getStatusCode());
             }

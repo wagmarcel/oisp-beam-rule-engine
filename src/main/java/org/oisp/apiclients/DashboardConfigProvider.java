@@ -33,7 +33,6 @@ public class DashboardConfigProvider implements DashboardConfig, Serializable {
         Object url = userConfig.get(Config.DASHBOARD_URL_PROPERTY);
         Object token = userConfig.get(Config.DASHBOARD_TOKEN_PROPERTY);
 
-
         if (token != null) {
             this.token = token.toString();
         } else {

@@ -41,13 +41,13 @@ public final class CustomRestTemplate {
     private static final Logger logger = LogHelper.getLogger(CustomRestTemplate.class);
     private final RestTemplate template;
 
-    private CustomRestTemplate(DashboardConfig dashboardConfig) {
+    private CustomRestTemplate() {
 
         template = new RestTemplate(createHttpRequestFactory());
     }
 
-    public static CustomRestTemplate build(DashboardConfig dashboardConfig) {
-        return new CustomRestTemplate(dashboardConfig);
+    public static CustomRestTemplate build() {
+        return new CustomRestTemplate();
     }
 
     public RestTemplate getRestTemplate() {

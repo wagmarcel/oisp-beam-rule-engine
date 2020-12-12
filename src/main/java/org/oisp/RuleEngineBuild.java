@@ -7,7 +7,6 @@ import org.oisp.conf.CmdlineOptions;
 import org.oisp.conf.Config;
 import org.oisp.conf.ExternalConfig;
 import org.oisp.pipeline.FullPipelineBuilder;
-import org.oisp.transformation.PersistRulesTask;
 import org.oisp.utils.LogHelper;
 import org.slf4j.Logger;
 
@@ -33,6 +32,7 @@ public abstract class RuleEngineBuild {
         Pipeline fullPipeline;
 
         //read json config from ENVIRONMENT - needed because stupid mvn cannot read JSON from cmdline. Unbelievable, but true.
+        LOG.info("JSONConfig=" + ((CmdlineOptions) options).getJSONConfig());
         String inputConfig = ((CmdlineOptions) options).getJSONConfig().replaceAll(" ", "\n");
         String config = new String(Base64.getMimeDecoder().decode(inputConfig));
 

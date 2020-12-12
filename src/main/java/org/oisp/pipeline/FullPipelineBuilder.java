@@ -76,6 +76,7 @@ public final class FullPipelineBuilder {
             downloadRulesTask = new DownloadRulesTask(conf);
             persistRulesTask = new PersistRulesTask(conf);
         } catch (InvalidDashboardResponseException e) {
+            LOG.error("Could not build API related tasks");
         }
         KafkaSourceProcessor rulesKafka = new KafkaSourceRulesUpdateProcessor(conf);
         PCollection<KV<String, String>> initialUpdateTrigger = p.apply(GenerateSequence.from(0).to(1))
@@ -107,6 +108,7 @@ public final class FullPipelineBuilder {
             getComponentRulesTask = new GetComponentRulesTask(conf, kafkaSideInput);
             sendAlertFromRule = new SendAlertFromRule(conf);
         } catch (InvalidDashboardResponseException e) {
+            LOG.error("Could not build API related tasks for sendAlerts or getComponents");
         }
         KafkaSourceObservationsProcessor observationsKafka = new KafkaSourceObservationsProcessor(conf);
         PCollection<List<RulesWithObservation>> rwo = p.apply(observationsKafka.getTransform())
